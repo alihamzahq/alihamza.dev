@@ -1,15 +1,19 @@
+import Hero from '@/components/sections/Hero';
+import About from '@/components/sections/About';
+import Skills from '@/components/sections/Skills';
+import Projects from '@/components/sections/Projects';
+import Experience from '@/components/sections/Experience';
+import Contact from '@/components/sections/Contact';
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Ali Hamza</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">
-          Full-Stack Developer
-        </p>
-        <p className="mt-4 text-gray-500 dark:text-gray-500">
-          Portfolio coming soon...
-        </p>
-      </div>
-    </main>
+    <>
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <Experience />
+      <Contact />
+    </>
   );
 }
