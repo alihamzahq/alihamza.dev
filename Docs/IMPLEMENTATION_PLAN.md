@@ -7,7 +7,7 @@
 **Tech Stack**:
 - Next.js 16 (App Router)
 - JavaScript (no TypeScript)
-- Tailwind CSS
+- Tailwind CSS v4 (CSS-based configuration)
 - System-based dark/light mode with manual toggle
 
 **Target Audience**: Recruiters, hiring managers, CTOs
@@ -19,11 +19,12 @@
 ```
 /var/www/portfolio/
 ├── app/
+│   ├── favicon.ico            # Site favicon (Next.js 16 convention)
+│   ├── globals.css            # Tailwind v4 imports + @theme config + custom CSS
 │   ├── layout.js              # Root layout, metadata, fonts, theme script
 │   ├── page.js                # Single-page portfolio (imports all sections)
-│   ├── globals.css            # Tailwind imports + custom CSS
-│   ├── robots.js              # SEO robots.txt
-│   └── sitemap.js             # SEO sitemap
+│   ├── robots.js              # SEO robots.txt (Phase 6)
+│   └── sitemap.js             # SEO sitemap (Phase 6)
 │
 ├── components/
 │   ├── layout/
@@ -53,16 +54,23 @@
 │   └── constants.js           # Social links, metadata constants
 │
 ├── public/
-│   ├── images/
-│   │   └── og-image.jpg       # Open Graph image (1200x630)
-│   └── favicon.ico
+│   └── images/
+│       └── og-image.jpg       # Open Graph image (1200x630)
 │
-├── tailwind.config.js         # Dark mode, colors, spacing, typography
-├── postcss.config.js
+├── Docs/
+│   ├── IMPLEMENTATION_PLAN.md # This file
+│   └── PROGRESS_TRACKING.md   # Phase progress tracker
+│
+├── .gitignore                 # Git ignore rules
+├── eslint.config.mjs          # ESLint configuration
 ├── jsconfig.json              # Path aliases (@/components, @/lib, etc.)
-├── next.config.js
-└── package.json
+├── next.config.mjs            # Next.js configuration
+├── package.json               # Dependencies and scripts
+├── package-lock.json          # Locked dependency versions
+└── postcss.config.mjs         # PostCSS with Tailwind plugin
 ```
+
+**Note**: Tailwind CSS v4 uses CSS-based configuration via `@theme inline` in `globals.css` instead of a separate `tailwind.config.js` file.
 
 ---
 
@@ -70,23 +78,25 @@
 
 ### Phase 1: Project Setup & Foundation
 
-1. Initialize Next.js 16 project with Tailwind CSS
+1. Initialize Next.js 16 project with Tailwind CSS v4
    ```bash
-   npx create-next-app@16 . --js --tailwind --eslint --app --src-dir=false --import-alias "@/*"
+   npx create-next-app@latest . --js --tailwind --eslint --app --no-src-dir --import-alias "@/*"
    ```
 
-2. Configure `tailwind.config.js`:
-   - Enable `darkMode: 'class'`
-   - Define color palette (neutral + blue accent)
-   - Set up consistent spacing scale (8px base)
+2. Configure `globals.css` with Tailwind v4:
+   - `@import "tailwindcss"` directive
+   - `@theme inline` block for custom colors and fonts
+   - CSS variables for light/dark mode
+   - `scroll-behavior: smooth`
+   - `scroll-margin-top` for sections (header offset)
 
 3. Set up `jsconfig.json` with path aliases
 
-4. Create `globals.css` with:
-   - Tailwind imports
-   - `scroll-behavior: smooth`
-   - `scroll-margin-top` for sections (header offset)
-   - Custom CSS variables for theming
+4. Configure project files:
+   - `next.config.mjs` - Next.js settings
+   - `postcss.config.mjs` - Tailwind PostCSS plugin
+   - `eslint.config.mjs` - Linting rules
+   - `.gitignore` - Git ignore patterns
 
 ---
 
@@ -337,7 +347,7 @@ Build each section in order:
 
 ## Critical Files (Priority Order)
 
-1. `tailwind.config.js` - Design system foundation
+1. `app/globals.css` - Design system foundation (Tailwind v4 @theme config)
 2. `app/layout.js` - Root layout, metadata, theme script
 3. `lib/data.js` - All content data
 4. `hooks/useTheme.js` - Theme management
