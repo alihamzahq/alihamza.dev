@@ -37,13 +37,13 @@
 
 ### Phase 2: Theme System & Layout
 - **Branch**: `feature/theme-layout`
-- **Status**: [ ] Not Started
+- **Status**: [x] Completed
 - **Tasks**:
-  - [ ] Create `hooks/useTheme.js` (light/dark/system modes)
-  - [ ] Add inline theme script in `app/layout.js`
-  - [ ] Build `components/layout/Header.jsx` (sticky nav, mobile menu)
-  - [ ] Build `components/layout/Footer.jsx`
-  - [ ] Create `components/ui/ThemeToggle.jsx`
+  - [x] Create `hooks/useTheme.js` (light/dark/system modes)
+  - [x] Add inline theme script in `app/layout.js`
+  - [x] Build `components/layout/Header.jsx` (sticky nav, mobile menu)
+  - [x] Build `components/layout/Footer.jsx`
+  - [x] Create `components/ui/ThemeToggle.jsx`
 
 ---
 
@@ -110,7 +110,7 @@
 | Phase | Branch | Status | Commit |
 |-------|--------|--------|--------|
 | 1. Project Setup | `feature/project-setup` | [x] Completed | `a612065` |
-| 2. Theme & Layout | `feature/theme-layout` | [ ] | - |
+| 2. Theme & Layout | `feature/theme-layout` | [x] Completed | `aba563a` |
 | 3. UI Components | `feature/ui-components` | [ ] | - |
 | 4. Data & Content | `feature/data-content` | [ ] | - |
 | 5. Section Components | `feature/section-components` | [ ] | - |
