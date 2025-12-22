@@ -90,7 +90,7 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
         <Header />
-        <main id="main-content" className="flex-grow pt-16">
+        <main id="main-content" className="flex-grow">
           {children}
         </main>
         <Footer />

@@ -60,10 +60,10 @@
 
 ### Phase 4: Data & Content
 - **Branch**: `feature/data-content`
-- **Status**: [ ] Not Started
+- **Status**: [x] Completed
 - **Tasks**:
-  - [ ] Create `lib/data.js` with all portfolio content
-  - [ ] Create `lib/constants.js` with social links and metadata
+  - [x] Create `lib/data.js` with all portfolio content
+  - [x] Create `lib/constants.js` with social links and metadata
 
 ---
 
@@ -112,7 +112,7 @@
 | 1. Project Setup | `feature/project-setup` | [x] Completed | `a612065` |
 | 2. Theme & Layout | `feature/theme-layout` | [x] Completed | `aba563a` |
 | 3. UI Components | `feature/ui-components` | [x] Completed | `97e2c8f` |
-| 4. Data & Content | `feature/data-content` | [ ] | - |
+| 4. Data & Content | `feature/data-content` | [x] Completed | `e399e4f` |
 | 5. Section Components | `feature/section-components` | [ ] | - |
 | 6. SEO & Metadata | `feature/seo-metadata` | [ ] | - |
 | 7. Responsive & Polish | `feature/responsive-polish` | [ ] | - |

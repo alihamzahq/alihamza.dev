@@ -94,7 +94,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-lg shadow-gray-900/5 dark:shadow-black/20 border-b border-gray-200/50 dark:border-slate-700/50'
+          ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-gray-900/5 dark:shadow-black/20 border-b border-gray-200/50 dark:border-slate-700/50'
           : 'bg-transparent'
       }`}
     >
@@ -106,10 +106,10 @@ export default function Header() {
           {/* Logo / Name */}
           <a
             href="#"
-            className={`text-lg font-bold transition-colors hover:text-blue-500 ${
+            className={`text-lg font-bold transition-all duration-200 ${
               scrolled
-                ? 'text-gray-900 dark:text-white'
-                : 'text-gray-900 dark:text-white'
+                ? 'text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400'
+                : 'text-white drop-shadow-sm hover:text-white/80'
             }`}
           >
             Ali Hamza
@@ -121,30 +121,30 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:text-blue-500 ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 link-underline ${
                   scrolled
-                    ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'
-                    : 'text-gray-700 dark:text-gray-200 hover:bg-white/20 dark:hover:bg-slate-800/50'
+                    ? 'text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20'
+                    : 'text-white/90 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {link.label}
               </a>
             ))}
-            <div className="ml-2">
-              <ThemeToggle />
+            <div className="ml-3 pl-3 border-l border-gray-200/50 dark:border-slate-700/50">
+              <ThemeToggle scrolled={scrolled} />
             </div>
           </div>
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
+            <ThemeToggle scrolled={scrolled} />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`p-2 rounded-lg transition-colors ${
                 scrolled
                   ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'
-                  : 'text-gray-700 dark:text-gray-200 hover:bg-white/20 dark:hover:bg-slate-800/50'
+                  : 'text-white hover:bg-white/10'
               }`}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -168,13 +168,21 @@ export default function Header() {
               : 'max-h-0 opacity-0 invisible'
           } overflow-hidden`}
         >
-          <div className="py-4 space-y-1 border-t border-gray-200/50 dark:border-slate-700/50">
+          <div className={`py-4 space-y-1 border-t ${
+            scrolled
+              ? 'border-gray-200/50 dark:border-slate-700/50'
+              : 'border-white/20'
+          }`}>
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200"
+                className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                  scrolled
+                    ? 'text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-slate-800'
+                    : 'text-white hover:bg-white/10'
+                }`}
               >
                 {link.label}
               </a>

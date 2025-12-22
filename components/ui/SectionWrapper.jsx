@@ -8,9 +8,9 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`relative py-16 md:py-24 ${
+      className={`relative py-20 md:py-28 ${
         alternate
-          ? 'bg-gradient-to-b from-gray-50 via-slate-50 to-white dark:from-slate-800 dark:via-slate-850 dark:to-slate-900'
+          ? 'bg-gray-50 dark:bg-slate-800/50'
           : 'bg-white dark:bg-slate-900'
       } ${className}`}
     >
@@ -34,7 +34,7 @@ export default function SectionWrapper({
 // Section heading component for consistent styling
 export function SectionHeading({ title, subtitle, centered = true }) {
   return (
-    <div className={`mb-12 ${centered ? 'text-center' : ''}`}>
+    <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
       <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl tracking-tight">
         {title}
       </h2>

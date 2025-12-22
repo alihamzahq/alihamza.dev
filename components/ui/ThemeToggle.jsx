@@ -63,7 +63,7 @@ function ComputerIcon({ className }) {
   );
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ scrolled = true }) {
   const { theme, setTheme, mounted } = useTheme();
 
   // Prevent hydration mismatch by not rendering until mounted
@@ -92,7 +92,11 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={handleToggle}
-      className="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className={`p-2 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+        scrolled
+          ? 'text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800'
+          : 'text-white/80 hover:text-white hover:bg-white/10'
+      }`}
       aria-label={`Current: ${themes[currentIndex]?.label}. Click to switch to ${nextTheme.label}`}
     >
       <CurrentIcon className="w-5 h-5" />

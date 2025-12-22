@@ -1,10 +1,10 @@
 const categoryStyles = {
-  backend: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300',
-  frontend: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
-  database: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
-  devops: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
-  ai: 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300',
-  default: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+  backend: 'skill-tag-backend',
+  frontend: 'skill-tag-frontend',
+  database: 'skill-tag-database',
+  devops: 'skill-tag-devops',
+  ai: 'skill-tag-ai',
+  default: 'bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700',
 };
 
 export default function SkillBadge({ skill, category = 'default' }) {
@@ -12,7 +12,7 @@ export default function SkillBadge({ skill, category = 'default' }) {
 
   return (
     <span
-      className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium ${style}`}
+      className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium transition-transform duration-200 hover:scale-105 cursor-default ${style}`}
     >
       {skill}
     </span>
@@ -22,8 +22,8 @@ export default function SkillBadge({ skill, category = 'default' }) {
 // Skill Category Component
 export function SkillCategory({ title, skills, category }) {
   return (
-    <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+    <div className="bg-white dark:bg-slate-800/80 rounded-2xl border border-gray-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300 card-hover">
+      <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
         {title}
       </h3>
       <div className="flex flex-wrap gap-2">

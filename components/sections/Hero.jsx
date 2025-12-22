@@ -1,4 +1,5 @@
-import Button from '@/components/ui/Button';
+'use client';
+
 import { personalInfo } from '@/lib/constants';
 
 function GitHubIcon({ className }) {
@@ -29,63 +30,99 @@ function LinkedInIcon({ className }) {
   );
 }
 
+function GlobeIcon({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A8.966 8.966 0 0 1 3 12c0-1.97.633-3.792 1.708-5.274"
+      />
+    </svg>
+  );
+}
+
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-16 md:py-24 overflow-hidden">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 pointer-events-none" />
+    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 md:pt-28 md:pb-28 overflow-hidden hero-gradient">
+      {/* Animated gradient overlay */}
+      <div className="hero-overlay animate-glow-pulse" />
 
-      {/* Gradient orbs for visual interest */}
-      <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-glow-pulse pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-indigo-400/20 dark:bg-indigo-500/10 rounded-full blur-3xl animate-glow-pulse pointer-events-none" style={{ animationDelay: '2s' }} />
+      {/* Grid pattern */}
+      <div className="hero-grid" />
 
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
+      {/* Floating orbs for visual depth */}
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '3s' }} />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Greeting */}
-          <p className="text-blue-600 dark:text-blue-400 font-semibold mb-4 tracking-wide animate-fade-in-up">
+          <p className="text-white/90 font-semibold mb-4 tracking-wide animate-fade-in-up text-sm uppercase">
             Hi, my name is
           </p>
 
           {/* Name */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in-up stagger-1 tracking-tight">
             {personalInfo.name}
           </h1>
 
           {/* Title */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-700 dark:text-gray-200 mb-3 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white/95 mb-4 animate-fade-in-up stagger-2">
             {personalInfo.title}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 font-medium animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <p className="text-lg text-white/85 mb-3 font-medium animate-fade-in-up stagger-3">
             {personalInfo.subtitle}
           </p>
 
+          {/* Remote Badge */}
+          <div className="flex justify-center mb-6 animate-fade-in-up stagger-3">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-sm text-white/95 rounded-full text-sm font-medium border border-white/20">
+              <GlobeIcon className="w-4 h-4 animate-pulse-soft" />
+              Open to Remote Opportunities
+            </span>
+          </div>
+
           {/* Tagline */}
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up stagger-4">
             {personalInfo.tagline}
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-            <Button href="#projects" size="lg">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up stagger-5">
+            {/* Primary Button - White on gradient */}
+            <a
+              href="#projects"
+              className="btn btn-lg btn-white"
+            >
               View My Work
-            </Button>
-            <Button href="#contact" variant="secondary" size="lg">
+            </a>
+            {/* Secondary Button - Transparent with border */}
+            <a
+              href="#contact"
+              className="btn btn-lg btn-white-outline"
+            >
               Get In Touch
-            </Button>
+            </a>
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center justify-center gap-3 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="flex items-center justify-center gap-4 animate-fade-in-up stagger-6">
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-200 rounded-xl hover:bg-white/80 dark:hover:bg-slate-800/80 hover:shadow-lg hover:scale-110"
+              className="p-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-xl hover:scale-110"
               aria-label="GitHub Profile"
             >
               <GitHubIcon className="w-6 h-6" />
@@ -94,7 +131,7 @@ export default function Hero() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-200 rounded-xl hover:bg-white/80 dark:hover:bg-slate-800/80 hover:shadow-lg hover:scale-110"
+              className="p-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-xl hover:scale-110"
               aria-label="LinkedIn Profile"
             >
               <LinkedInIcon className="w-6 h-6" />
@@ -104,25 +141,26 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="p-2 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm shadow-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-5 h-5 text-gray-600 dark:text-gray-300"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-            />
-          </svg>
-        </div>
-      </div>
+      <button
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer transition-colors"
+        aria-label="Scroll to About section"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6 text-white/50 hover:text-white"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m19.5 8.25-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </button>
     </section>
   );
 }
