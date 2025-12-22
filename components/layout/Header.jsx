@@ -92,9 +92,9 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm'
+          ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-lg shadow-gray-900/5 dark:shadow-black/20 border-b border-gray-200/50 dark:border-slate-700/50'
           : 'bg-transparent'
       }`}
     >
@@ -106,23 +106,33 @@ export default function Header() {
           {/* Logo / Name */}
           <a
             href="#"
-            className="text-lg font-semibold text-gray-900 dark:text-white hover:text-accent dark:hover:text-accent transition-colors"
+            className={`text-lg font-bold transition-colors hover:text-blue-500 ${
+              scrolled
+                ? 'text-gray-900 dark:text-white'
+                : 'text-gray-900 dark:text-white'
+            }`}
           >
             Ali Hamza
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:gap-8">
+          <div className="hidden md:flex md:items-center md:gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:text-blue-500 ${
+                  scrolled
+                    ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-white/20 dark:hover:bg-slate-800/50'
+                }`}
               >
                 {link.label}
               </a>
             ))}
-            <ThemeToggle />
+            <div className="ml-2">
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -131,7 +141,11 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className={`p-2 rounded-lg transition-colors ${
+                scrolled
+                  ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'
+                  : 'text-gray-700 dark:text-gray-200 hover:bg-white/20 dark:hover:bg-slate-800/50'
+              }`}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -148,19 +162,19 @@ export default function Header() {
         {/* Mobile Navigation Menu */}
         <div
           id="mobile-menu"
-          className={`md:hidden transition-all duration-200 ease-in-out ${
+          className={`md:hidden transition-all duration-300 ease-in-out ${
             mobileMenuOpen
               ? 'max-h-screen opacity-100 visible'
               : 'max-h-0 opacity-0 invisible'
           } overflow-hidden`}
         >
-          <div className="py-4 space-y-1 border-t border-gray-200 dark:border-gray-700">
+          <div className="py-4 space-y-1 border-t border-gray-200/50 dark:border-slate-700/50">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="block px-4 py-3 text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200"
               >
                 {link.label}
               </a>

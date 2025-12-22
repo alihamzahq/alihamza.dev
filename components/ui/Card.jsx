@@ -35,23 +35,26 @@ function ExternalLinkIcon({ className }) {
 // Project Card Component
 export function ProjectCard({ title, description, stack, github, demo, problem }) {
   return (
-    <div className="group relative bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
-      <div className="flex flex-col h-full">
+    <div className="group relative bg-white dark:bg-slate-800/80 rounded-2xl border border-gray-200/80 dark:border-slate-700/80 p-6 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 dark:hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+      {/* Subtle gradient overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+      <div className="relative flex flex-col h-full">
         {/* Title */}
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow">
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow leading-relaxed">
           {description}
         </p>
 
         {/* Problem Solved */}
         {problem && (
-          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+          <div className="mb-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 rounded-xl border border-blue-100 dark:border-blue-900/50">
             <p className="text-sm text-blue-700 dark:text-blue-300">
-              <span className="font-medium">Key value:</span> {problem}
+              <span className="font-semibold">Key value:</span> {problem}
             </p>
           </div>
         )}
@@ -61,7 +64,7 @@ export function ProjectCard({ title, description, stack, github, demo, problem }
           {stack.map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 rounded"
+              className="px-2.5 py-1 text-xs font-medium bg-gray-100 dark:bg-slate-700/80 text-gray-700 dark:text-gray-200 rounded-lg"
             >
               {tech}
             </span>
@@ -69,13 +72,13 @@ export function ProjectCard({ title, description, stack, github, demo, problem }
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+        <div className="flex items-center gap-4 pt-4 border-t border-gray-100 dark:border-slate-700/50">
           {github && (
             <a
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
             >
               <GitHubIcon className="w-4 h-4" />
               Code
@@ -102,10 +105,10 @@ export function ProjectCard({ title, description, stack, github, demo, problem }
 export function ExperienceCard({ company, role, period, location, highlights }) {
   return (
     <div className="relative pl-8 pb-8 border-l-2 border-gray-200 dark:border-slate-700 last:pb-0">
-      {/* Timeline dot */}
-      <div className="absolute left-[-9px] top-0 w-4 h-4 bg-blue-600 dark:bg-blue-500 rounded-full border-4 border-white dark:border-slate-900" />
+      {/* Timeline dot with glow */}
+      <div className="absolute left-[-9px] top-0 w-4 h-4 bg-blue-600 dark:bg-blue-500 rounded-full border-4 border-white dark:border-slate-900 shadow-lg shadow-blue-500/30" />
 
-      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
+      <div className="bg-white dark:bg-slate-800/80 rounded-2xl border border-gray-200/80 dark:border-slate-700/80 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
           <div>
@@ -116,21 +119,25 @@ export function ExperienceCard({ company, role, period, location, highlights }) 
               {company}
             </p>
           </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            <p>{period}</p>
+          <div className="text-sm text-gray-500 dark:text-gray-400 text-right">
+            <p className="font-medium">{period}</p>
             {location && <p>{location}</p>}
           </div>
         </div>
 
         {/* Highlights */}
-        <ul className="space-y-2">
+        <ul className="space-y-2.5">
           {highlights.map((highlight, index) => (
             <li
               key={index}
-              className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400"
+              className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-300"
             >
-              <span className="text-blue-600 dark:text-blue-400 mt-1.5">•</span>
-              <span>{highlight}</span>
+              <span className="text-blue-500 dark:text-blue-400 mt-1 flex-shrink-0">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </span>
+              <span className="leading-relaxed">{highlight}</span>
             </li>
           ))}
         </ul>
@@ -143,8 +150,8 @@ export function ExperienceCard({ company, role, period, location, highlights }) 
 export default function Card({ children, className = '', hoverable = true }) {
   return (
     <div
-      className={`bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 shadow-sm ${
-        hoverable ? 'hover:shadow-md transition-shadow duration-200' : ''
+      className={`bg-white dark:bg-slate-800/80 rounded-2xl border border-gray-200/80 dark:border-slate-700/80 p-6 shadow-sm ${
+        hoverable ? 'hover:shadow-lg transition-all duration-300' : ''
       } ${className}`}
     >
       {children}

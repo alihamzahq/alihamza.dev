@@ -31,39 +31,46 @@ function LinkedInIcon({ className }) {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-16 md:py-24">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-950/20 dark:to-transparent pointer-events-none" />
+    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-16 md:py-24 overflow-hidden">
+      {/* Background layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 pointer-events-none" />
+
+      {/* Gradient orbs for visual interest */}
+      <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-glow-pulse pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-indigo-400/20 dark:bg-indigo-500/10 rounded-full blur-3xl animate-glow-pulse pointer-events-none" style={{ animationDelay: '2s' }} />
+
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Greeting */}
-          <p className="text-blue-600 dark:text-blue-400 font-medium mb-4">
+          <p className="text-blue-600 dark:text-blue-400 font-semibold mb-4 tracking-wide animate-fade-in-up">
             Hi, my name is
           </p>
 
           {/* Name */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             {personalInfo.name}
           </h1>
 
           {/* Title */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-600 dark:text-gray-300 mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-700 dark:text-gray-200 mb-3 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             {personalInfo.title}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 font-medium animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             {personalInfo.subtitle}
           </p>
 
           {/* Tagline */}
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             {personalInfo.tagline}
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
             <Button href="#projects" size="lg">
               View My Work
             </Button>
@@ -73,12 +80,12 @@ export default function Hero() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-3 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="p-3 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-200 rounded-xl hover:bg-white/80 dark:hover:bg-slate-800/80 hover:shadow-lg hover:scale-110"
               aria-label="GitHub Profile"
             >
               <GitHubIcon className="w-6 h-6" />
@@ -87,7 +94,7 @@ export default function Hero() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="p-3 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-200 rounded-xl hover:bg-white/80 dark:hover:bg-slate-800/80 hover:shadow-lg hover:scale-110"
               aria-label="LinkedIn Profile"
             >
               <LinkedInIcon className="w-6 h-6" />
@@ -98,21 +105,23 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6 text-gray-400"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-          />
-        </svg>
+        <div className="p-2 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm shadow-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-5 h-5 text-gray-600 dark:text-gray-300"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m19.5 8.25-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </div>
       </div>
     </section>
   );
