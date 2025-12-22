@@ -1,5 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,8 +32,15 @@ export default function RootLayout({ children }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${inter.variable} antialiased min-h-screen bg-background text-foreground`}>
-        {children}
+      <body
+        className={`${inter.variable} antialiased min-h-screen bg-background text-foreground flex flex-col`}
+        suppressHydrationWarning
+      >
+        <Header />
+        <main className="flex-grow pt-16">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
