@@ -600,3 +600,129 @@ section {
 .btn-icon.btn-lg {
   padding: 0.875rem;
 }
+
+/* ================================
+   MOBILE MENU SYSTEM
+   ================================ */
+
+/* Backdrop Overlay */
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Menu Container */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: #ffffff;
+  padding: 80px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dark .mobile-menu {
+  background: #0f172a;
+}
+
+/* Menu Header */
+.mobile-menu-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.mobile-menu-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dark .mobile-menu-logo {
+  color: #f9fafb;
+}
+
+.mobile-menu-close {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #4b5563;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.mobile-menu-close:hover {
+  color: #111827;
+}
+
+.dark .mobile-menu-close {
+  color: #9ca3af;
+}
+
+.dark .mobile-menu-close:hover {
+  color: #f9fafb;
+}
+
+/* Navigation Links */
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.mobile-menu-link {
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #374151;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.mobile-menu-link:hover {
+  background: rgba(79, 70, 229, 0.08);
+  color: #4f46e5;
+}
+
+.dark .mobile-menu-link {
+  color: #d1d5db;
+}
+
+.dark .mobile-menu-link:hover {
+  background: rgba(129, 140, 248, 0.1);
+  color: #818cf8;
+}
