@@ -88,7 +88,3 @@ MIT License - feel free to use this as a template for your own portfolio.
 - **Email:** hello@alihamza.dev
 - **LinkedIn:** [alihamzadev](https://linkedin.com/in/alihamzadev)
 - **GitHub:** [alihamzahq](https://github.com/alihamzahq)
-
----
-
-Built with Next.js and deployed on Vercel.
