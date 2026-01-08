@@ -73,20 +73,42 @@ export default function ThemeToggle({ scrolled = true }) {
     );
   }
 
-  const themes = [
-    { value: 'light', icon: SunIcon, label: 'Light mode' },
-    { value: 'dark', icon: MoonIcon, label: 'Dark mode' },
-    { value: 'system', icon: ComputerIcon, label: 'System preference' },
-  ];
+  // Theme cycle: Light → Dark → System → Light
+  const themeOrder = ['light', 'dark', 'system'];
 
-  const currentIndex = themes.findIndex((t) => t.value === theme);
-  const nextTheme = themes[(currentIndex + 1) % themes.length];
-
-  const handleToggle = () => {
-    setTheme(nextTheme.value);
+  // Icon shows what clicking will DO (next mode)
+  const getNextTheme = (current) => {
+    const currentIndex = themeOrder.indexOf(current);
+    return themeOrder[(currentIndex + 1) % themeOrder.length];
   };
 
-  const CurrentIcon = themes[currentIndex]?.icon || SunIcon;
+  const nextTheme = getNextTheme(theme);
+
+  // Show icon for NEXT mode (what clicking will do)
+  const getIconForNextTheme = (next) => {
+    switch (next) {
+      case 'dark':
+        return MoonIcon; // Click to go dark
+      case 'system':
+        return ComputerIcon; // Click to go system
+      case 'light':
+        return SunIcon; // Click to go light
+      default:
+        return SunIcon;
+    }
+  };
+
+  const labels = {
+    light: 'Light mode',
+    dark: 'Dark mode',
+    system: 'System preference',
+  };
+
+  const handleToggle = () => {
+    setTheme(nextTheme);
+  };
+
+  const IconComponent = getIconForNextTheme(nextTheme);
 
   return (
     <button
@@ -97,9 +119,9 @@ export default function ThemeToggle({ scrolled = true }) {
           ? 'text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800'
           : 'text-white/80 hover:text-white hover:bg-white/10'
       }`}
-      aria-label={`Current: ${themes[currentIndex]?.label}. Click to switch to ${nextTheme.label}`}
+      aria-label={`Current: ${labels[theme]}. Click to switch to ${labels[nextTheme]}`}
     >
-      <CurrentIcon className="w-5 h-5" />
+      <IconComponent className="w-5 h-5" />
     </button>
   );
 }
