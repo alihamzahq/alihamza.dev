@@ -43,26 +43,6 @@ function MoonIcon({ className }) {
   );
 }
 
-function ComputerIcon({ className }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className={className}
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"
-      />
-    </svg>
-  );
-}
-
 export default function ThemeToggle({ scrolled = true }) {
   const { theme, setTheme, mounted } = useTheme();
 
@@ -73,53 +53,27 @@ export default function ThemeToggle({ scrolled = true }) {
     );
   }
 
-  // Theme cycle: Light → Dark → System → Light
-  const themeOrder = ['light', 'dark', 'system'];
-
-  // Icon shows what clicking will DO (next mode)
-  const getNextTheme = (current) => {
-    const currentIndex = themeOrder.indexOf(current);
-    return themeOrder[(currentIndex + 1) % themeOrder.length];
-  };
-
-  const nextTheme = getNextTheme(theme);
-
-  // Show icon for NEXT mode (what clicking will do)
-  const getIconForNextTheme = (next) => {
-    switch (next) {
-      case 'dark':
-        return MoonIcon; // Click to go dark
-      case 'system':
-        return ComputerIcon; // Click to go system
-      case 'light':
-        return SunIcon; // Click to go light
-      default:
-        return SunIcon;
-    }
-  };
-
-  const labels = {
-    light: 'Light mode',
-    dark: 'Dark mode',
-    system: 'System preference',
-  };
-
+  // Simple toggle: Light ↔ Dark
   const handleToggle = () => {
-    setTheme(nextTheme);
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
-  const IconComponent = getIconForNextTheme(nextTheme);
+  // Show icon for what clicking will DO (next mode)
+  // Light mode shows Moon (click to go dark)
+  // Dark mode shows Sun (click to go light)
+  const IconComponent = theme === 'light' ? MoonIcon : SunIcon;
+  const nextMode = theme === 'light' ? 'dark' : 'light';
 
   return (
     <button
       type="button"
       onClick={handleToggle}
-      className={`p-2 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+      className={`p-2 rounded-lg transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
         scrolled
           ? 'text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800'
           : 'text-white/80 hover:text-white hover:bg-white/10'
       }`}
-      aria-label={`Current: ${labels[theme]}. Click to switch to ${labels[nextTheme]}`}
+      aria-label={`Switch to ${nextMode} mode`}
     >
       <IconComponent className="w-5 h-5" />
     </button>

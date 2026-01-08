@@ -5,8 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 const THEME_KEY = 'theme';
 
 export function useTheme() {
-  const [theme, setThemeState] = useState('system');
-  const [resolvedTheme, setResolvedTheme] = useState('light');
+  const [theme, setThemeState] = useState(null); // null = not yet determined
   const [mounted, setMounted] = useState(false);
 
   // Get system preference
@@ -17,16 +16,12 @@ export function useTheme() {
 
   // Apply theme to document
   const applyTheme = useCallback((newTheme) => {
-    const resolved = newTheme === 'system' ? getSystemTheme() : newTheme;
-
-    if (resolved === 'dark') {
+    if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-
-    setResolvedTheme(resolved);
-  }, [getSystemTheme]);
+  }, []);
 
   // Set theme and persist to localStorage
   const setTheme = useCallback((newTheme) => {
@@ -37,30 +32,44 @@ export function useTheme() {
 
   // Initialize theme on mount
   useEffect(() => {
-    const savedTheme = localStorage.getItem(THEME_KEY) || 'system';
-    setThemeState(savedTheme);
-    applyTheme(savedTheme);
-    setMounted(true);
-  }, [applyTheme]);
+    const savedTheme = localStorage.getItem(THEME_KEY);
 
-  // Listen for system preference changes
+    if (savedTheme) {
+      // User has a saved preference
+      setThemeState(savedTheme);
+      applyTheme(savedTheme);
+    } else {
+      // No saved preference - use system preference
+      const systemTheme = getSystemTheme();
+      setThemeState(systemTheme);
+      applyTheme(systemTheme);
+    }
+
+    setMounted(true);
+  }, [applyTheme, getSystemTheme]);
+
+  // Listen for system preference changes (only if no saved preference)
   useEffect(() => {
-    if (theme !== 'system') return;
+    if (!mounted) return;
+
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme) return; // User has explicit preference, don't override
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    const handleChange = () => {
-      applyTheme('system');
+    const handleChange = (e) => {
+      const newTheme = e.matches ? 'dark' : 'light';
+      setThemeState(newTheme);
+      applyTheme(newTheme);
     };
 
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme, applyTheme]);
+  }, [mounted, applyTheme]);
 
   return {
-    theme,
+    theme: theme || 'light', // Fallback for SSR
     setTheme,
-    resolvedTheme,
     mounted,
   };
 }
