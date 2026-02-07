@@ -22,7 +22,7 @@ export default function Projects() {
     <SectionWrapper id="projects">
       <SectionHeading
         title="Featured Projects"
-        subtitle="Open-source projects showcasing my expertise"
+        subtitle="Projects showcasing my expertise"
       />
 
       <div className="max-w-5xl mx-auto">
