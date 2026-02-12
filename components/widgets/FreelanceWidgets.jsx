@@ -10,7 +10,7 @@ export default function FreelanceWidgets() {
         Hire Me on Freelance Platforms
       </h3>
 
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap justify-center items-start gap-6">
         <PphWidget />
         <UpworkWidget />
       </div>
