@@ -7,7 +7,7 @@ export default function FreelanceWidgets() {
   return (
     <div className="mb-12">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center mb-6">
-        Hire Me on Freelance Platforms
+        Also Available On
       </h3>
 
       <div className="flex flex-wrap justify-center items-start gap-6">
