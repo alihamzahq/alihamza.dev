@@ -98,7 +98,7 @@ export default function PphCustomWidget() {
       {/* CTA button */}
       <div className="px-3 pb-3">
         <a
-          href={freelanceProfiles.pph.profileUrl}
+          href={freelanceProfiles.pph.widgetTrackingUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full text-center py-2 rounded text-white font-bold text-sm transition-opacity hover:opacity-90"
