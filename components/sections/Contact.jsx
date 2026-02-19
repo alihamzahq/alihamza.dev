@@ -1,6 +1,6 @@
 import SectionWrapper, { SectionHeading } from '@/components/ui/SectionWrapper';
 import { personalInfo } from '@/lib/constants';
-import FreelanceWidgets from '@/components/widgets/FreelanceWidgets';
+// import FreelanceWidgets from '@/components/widgets/FreelanceWidgets';
 
 function EnvelopeIcon({ className }) {
   return (
@@ -112,8 +112,8 @@ export default function Contact() {
           })}
         </div>
 
-        {/* Freelance Platform Widgets */}
-        <FreelanceWidgets />
+        {/* Freelance Platform Widgets - temporarily hidden */}
+        {/* <FreelanceWidgets /> */}
 
         {/* CTA Banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-10 text-center shadow-xl">
