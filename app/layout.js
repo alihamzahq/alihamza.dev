@@ -18,6 +18,9 @@ export const metadata = {
     template: `%s | ${personalInfo.name}`,
   },
   description: siteMetadata.description,
+  alternates: {
+    canonical: siteMetadata.url,
+  },
   keywords: siteMetadata.keywords,
   authors: [{ name: personalInfo.name, url: siteMetadata.url }],
   creator: personalInfo.name,
