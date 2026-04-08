@@ -33,11 +33,23 @@ function ExternalLinkIcon({ className }) {
 }
 
 // Project Card Component
-export function ProjectCard({ slug, title, description, stack, github, demo, problem }) {
+export function ProjectCard({ slug, title, description, stack, github, demo, problem, coverImage }) {
   return (
     <div className="group relative bg-white dark:bg-slate-800/80 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden card-glow">
       {/* Gradient overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-transparent dark:from-indigo-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+      {/* Cover Image */}
+      {coverImage && (
+        <a href={`/projects/${slug}`} className="block overflow-hidden">
+          <img
+            src={coverImage}
+            alt={`${title} preview`}
+            className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        </a>
+      )}
 
       <div className="relative p-6 flex flex-col h-full">
         {/* Title */}

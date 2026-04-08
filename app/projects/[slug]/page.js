@@ -293,6 +293,35 @@ export default async function ProjectPage({ params }) {
             </InfoCard>
           )}
 
+          {/* Screenshots */}
+          {project.screenshots && project.screenshots.length > 0 && (
+            <InfoCard title="Screenshots" icon="&#128247;">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {project.screenshots.map((screenshot, i) => (
+                  <a
+                    key={i}
+                    href={screenshot.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="flex-grow bg-gray-50 dark:bg-slate-800/50">
+                      <img
+                        src={screenshot.src}
+                        alt={screenshot.alt}
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-slate-800/50 border-t border-gray-200 dark:border-slate-700">
+                      {screenshot.alt}
+                    </p>
+                  </a>
+                ))}
+              </div>
+            </InfoCard>
+          )}
+
           {/* CTA */}
           <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-200 dark:border-slate-700">
             <div>
