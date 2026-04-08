@@ -33,7 +33,7 @@ function ExternalLinkIcon({ className }) {
 }
 
 // Project Card Component
-export function ProjectCard({ title, description, stack, github, demo, problem }) {
+export function ProjectCard({ slug, title, description, stack, github, demo, problem }) {
   return (
     <div className="group relative bg-white dark:bg-slate-800/80 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden card-glow">
       {/* Gradient overlay on hover */}
@@ -42,7 +42,9 @@ export function ProjectCard({ title, description, stack, github, demo, problem }
       <div className="relative p-6 flex flex-col h-full">
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-          {title}
+          <a href={`/projects/${slug}`} className="hover:underline">
+            {title}
+          </a>
         </h3>
 
         {/* Description */}
@@ -73,6 +75,13 @@ export function ProjectCard({ title, description, stack, github, demo, problem }
 
         {/* Links */}
         <div className="flex items-center gap-4 pt-4 border-t border-gray-100 dark:border-slate-700/50">
+          <a
+            href={`/projects/${slug}`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors link-underline"
+          >
+            <ExternalLinkIcon className="w-4 h-4" />
+            View Details
+          </a>
           {github && (
             <a
               href={github}
@@ -89,7 +98,7 @@ export function ProjectCard({ title, description, stack, github, demo, problem }
               href={demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors link-underline"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors link-underline"
             >
               <ExternalLinkIcon className="w-4 h-4" />
               Live Demo
