@@ -45,28 +45,28 @@ export function ProjectCard({ slug, title, description, stack, github, demo, pro
           <img
             src={coverImage}
             alt={`${title} preview`}
-            className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-36 sm:h-44 md:h-48 object-cover object-top transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
         </a>
       )}
 
-      <div className="relative p-6 flex flex-col h-full">
+      <div className="relative p-4 sm:p-6">
         {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
           <a href={`/projects/${slug}`} className="hover:underline">
             {title}
           </a>
         </h3>
 
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 sm:mb-4 leading-relaxed">
           {description}
         </p>
 
         {/* Problem Solved */}
         {problem && (
-          <div className="mb-4 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 rounded-xl border border-indigo-100 dark:border-indigo-900/50">
+          <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 rounded-xl border border-indigo-100 dark:border-indigo-900/50">
             <p className="text-sm text-indigo-700 dark:text-indigo-300">
               <span className="font-semibold">Key value:</span> {problem}
             </p>
@@ -74,7 +74,7 @@ export function ProjectCard({ slug, title, description, stack, github, demo, pro
         )}
 
         {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
           {stack.map((tech) => (
             <span
               key={tech}
