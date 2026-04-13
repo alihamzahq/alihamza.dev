@@ -65,6 +65,16 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
+          {/* Profile Photo */}
+          <div className="mb-6 animate-fade-in-up">
+            <img
+              src="/images/profile.jpeg"
+              alt={personalInfo.name}
+              className="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto object-cover border-4 border-white/20 shadow-xl"
+              loading="eager"
+            />
+          </div>
+
           {/* Greeting */}
           <p className="text-white/90 font-semibold mb-4 tracking-wide animate-fade-in-up text-sm uppercase">
             Hi, my name is
