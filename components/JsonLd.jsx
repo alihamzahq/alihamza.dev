@@ -23,6 +23,20 @@ export default function JsonLd() {
       addressCountry: personalInfo.location.split(',')[1]?.trim() || 'Pakistan',
     },
     knowsAbout: allSkills,
+    knowsLanguage: ['English', 'Urdu'],
+    nationality: {
+      '@type': 'Country',
+      name: 'Pakistan',
+    },
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: personalInfo.title,
+      skills: allSkills.join(', '),
+    },
+    seeks: {
+      '@type': 'Demand',
+      name: 'Remote Full-Stack Developer roles',
+    },
     alumniOf: {
       '@type': 'EducationalOrganization',
       name: 'Virtual University of Pakistan',
@@ -31,6 +45,13 @@ export default function JsonLd() {
       '@type': 'Organization',
       name: experience[0]?.company || 'Sixlogics',
     },
+  };
+
+  const profilePageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url: siteMetadata.url,
+    mainEntity: personSchema,
   };
 
   const websiteSchema = {
@@ -54,6 +75,10 @@ export default function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
       />
     </>
   );

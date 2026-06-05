@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { projects } from '@/lib/data';
 import { siteMetadata, personalInfo } from '@/lib/constants';
+import ProjectJsonLd from '@/components/ProjectJsonLd';
 
 function getProject(slug) {
   return projects.find((p) => p.slug === slug);
@@ -144,6 +145,7 @@ export default async function ProjectPage({ params }) {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
+      <ProjectJsonLd project={project} />
       {/* Header */}
       <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 pt-24 pb-16 md:pt-28 md:pb-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
