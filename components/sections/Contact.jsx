@@ -50,10 +50,13 @@ function LinkedInIcon({ className }) {
   );
 }
 
+// Display handle taken from a profile URL, e.g. https://linkedin.com/in/alihamzadev -> alihamzadev
+const handleFromUrl = (url) => new URL(url).pathname.split('/').filter(Boolean).pop();
+
 const contactMethods = [
   {
     name: 'Email',
-    description: 'Drop me a line anytime',
+    description: 'Best for roles and contract enquiries',
     href: `mailto:${personalInfo.email}`,
     value: personalInfo.email,
     icon: EnvelopeIcon,
@@ -62,14 +65,14 @@ const contactMethods = [
     name: 'LinkedIn',
     description: 'Let\'s connect professionally',
     href: personalInfo.linkedin,
-    value: 'alihamzadev',
+    value: handleFromUrl(personalInfo.linkedin),
     icon: LinkedInIcon,
   },
   {
     name: 'GitHub',
-    description: 'Check out my code',
+    description: 'Browse my repositories',
     href: personalInfo.github,
-    value: 'alihamzahq',
+    value: handleFromUrl(personalInfo.github),
     icon: GitHubIcon,
   },
 ];
@@ -79,7 +82,7 @@ export default function Contact() {
     <SectionWrapper id="contact">
       <SectionHeading
         title="Get In Touch"
-        subtitle="Have a project in mind? Let's talk about it"
+        subtitle="Open to full-time international remote roles and long-term contracts"
       />
 
       <div className="max-w-3xl mx-auto">
@@ -116,36 +119,36 @@ export default function Contact() {
         {/* <FreelanceWidgets /> */}
 
         {/* CTA Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-10 text-center shadow-xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-6 sm:p-10 text-center shadow-xl focus-on-gradient">
           {/* Background pattern */}
           <div className="absolute inset-0 hero-grid opacity-30" />
 
           <div className="relative">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Looking for a Full-Stack Developer?
+              Looking for a Senior Full-Stack or Backend Engineer?
             </h3>
-            <p className="text-white/90 mb-8 max-w-lg mx-auto leading-relaxed">
-              I'm currently open to remote opportunities. Whether you need help building a
-              new product, scaling your existing platform, or leading a development team,
-              I'd love to hear from you.
+            <p className="text-white mb-8 max-w-lg mx-auto leading-relaxed">
+              I&apos;m open to full-time international remote roles and long-term contracts. If you&apos;re
+              building or scaling a Laravel or React platform, or need an engineer who can also
+              lead a team, I&apos;d be glad to talk.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href={`mailto:${personalInfo.email}?subject=Job Opportunity`}
+                href={`mailto:${personalInfo.email}?subject=${encodeURIComponent('Engineering opportunity')}`}
                 className="btn btn-lg btn-white"
               >
                 <EnvelopeIcon className="w-5 h-5" />
                 Send Me an Email
               </a>
               <a
-                href="/Ali_Hamza_Full_Stack_Developer.pdf"
+                href={personalInfo.resume}
                 download
                 className="inline-flex items-center gap-2 btn btn-lg btn-white-outline"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
-                Download CV
+                Download Resume
               </a>
             </div>
           </div>

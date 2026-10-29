@@ -30,7 +30,9 @@ export function useTheme() {
     applyTheme(newTheme);
   }, [applyTheme]);
 
-  // Initialize theme on mount
+  // Initialize theme on mount. localStorage can only be read after hydration (reading it
+  // during render would cause a server/client mismatch), so state is synced from an effect.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const savedTheme = localStorage.getItem(THEME_KEY);
 
@@ -47,6 +49,7 @@ export function useTheme() {
 
     setMounted(true);
   }, [applyTheme, getSystemTheme]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Listen for system preference changes (only if no saved preference)
   useEffect(() => {

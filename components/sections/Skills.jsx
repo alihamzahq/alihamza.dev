@@ -27,10 +27,18 @@ function DatabaseIcon({ className }) {
   );
 }
 
-function DevOpsIcon({ className }) {
+function InfrastructureIcon({ className }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+    </svg>
+  );
+}
+
+function EngineeringIcon({ className }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
     </svg>
   );
 }
@@ -59,8 +67,13 @@ const categoryConfig = {
     gradient: 'from-emerald-500 to-emerald-600',
     shadow: 'shadow-emerald-500/25',
   },
-  devops: {
-    icon: DevOpsIcon,
+  engineering: {
+    icon: EngineeringIcon,
+    gradient: 'from-rose-500 to-pink-600',
+    shadow: 'shadow-rose-500/25',
+  },
+  infrastructure: {
+    icon: InfrastructureIcon,
     gradient: 'from-purple-500 to-purple-600',
     shadow: 'shadow-purple-500/25',
   },
@@ -108,7 +121,7 @@ export default function Skills() {
     <SectionWrapper id="skills" alternate>
       <SectionHeading
         title="Skills & Technologies"
-        subtitle="Technologies I work with to build robust applications"
+        subtitle="Core technologies across backend, frontend, data, and delivery"
       />
 
       <div className="max-w-5xl mx-auto">
@@ -129,9 +142,9 @@ export default function Skills() {
             {/* Gradient accent line at top */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500" />
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              I continuously explore new technologies and leverage AI tools to enhance productivity
-              and deliver high-quality solutions faster. My toolkit evolves with the industry while
-              maintaining strong fundamentals in software architecture and best practices.
+              My strongest depth is in backend and full-stack application engineering: Laravel,
+              APIs, databases, and performance. Infrastructure and AI tooling support how I build,
+              test, and ship those applications.
             </p>
           </div>
         </div>

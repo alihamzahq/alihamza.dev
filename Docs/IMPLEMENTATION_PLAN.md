@@ -1,3 +1,5 @@
+> **Historical document.** This is the original build plan. Copy and figures below (titles, years of experience, metrics, filenames) are superseded; `lib/constants.js` and `lib/data.js` are the source of truth.
+
 # Portfolio Website Implementation Plan
 
 ## Project Overview

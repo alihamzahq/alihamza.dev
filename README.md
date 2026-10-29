@@ -1,8 +1,8 @@
 # Ali Hamza - Portfolio
 
-A modern, responsive portfolio website built with Next.js 16, showcasing my work as a Full-Stack Developer with 6+ years of experience.
+A modern, responsive portfolio website built with Next.js 16, presenting my work as a Senior Full-Stack and Backend Engineer with 7+ years of experience.
 
-**Live Demo:** [alihamza.dev](https://alihamza.dev)
+**Live site:** [alihamza.dev](https://alihamza.dev)
 
 ## Tech Stack
 
@@ -16,7 +16,7 @@ A modern, responsive portfolio website built with Next.js 16, showcasing my work
 - Responsive design optimized for all devices
 - Dark/Light mode with system preference detection
 - SEO optimized with JSON-LD structured data
-- Accessible (WCAG compliant)
+- Accessibility-minded: semantic headings, skip link, keyboard-navigable menu with visible focus rings, reduced-motion support, and contrast-checked colors (not formally audited or certified)
 - Performance optimized with static generation
 - Smooth animations and micro-interactions
 
@@ -25,7 +25,7 @@ A modern, responsive portfolio website built with Next.js 16, showcasing my work
 - **Hero** - Introduction with gradient background and CTAs
 - **About** - Background, highlights, and remote work availability
 - **Skills** - Technical skills organized by category
-- **Projects** - Featured work with descriptions and links
+- **Projects** - Featured work with descriptions and links, each labeled as commercial (private source) or personal (public source)
 - **Experience** - Professional timeline
 - **Contact** - Multiple contact methods and CTA
 
@@ -71,13 +71,20 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
+| `npm run lint` | Run ESLint (flat config, `eslint-config-next/core-web-vitals`) |
 
 ## Customization
 
-1. Update personal information in `lib/constants.js`
+1. Update personal information in `lib/constants.js` (including the resume path, `personalInfo.resume`)
 2. Modify content data in `lib/data.js`
 3. Adjust theme colors in `app/globals.css`
+
+### Maintenance notes
+
+- **Resume:** the downloadable PDF lives in `public/` and is referenced only through `personalInfo.resume`. The old filename (`/Ali_Hamza_Full_Stack_Developer.pdf`) redirects to it via `next.config.mjs`.
+- **Sitemap dates:** bump `siteMetadata.contentUpdated` in `lib/constants.js` whenever content changes, so `lastModified` stays truthful.
+- **Open Graph image:** `public/images/og-senior-engineer.jpg` (1200x630). If you replace it, use a new filename so social platforms don't serve a cached preview.
+- **Projects:** each project has a `kind` (`commercial` or `personal`) and typed `links`. Use `case-study` for documentation-only repositories, never `source`.
 
 ## License
 

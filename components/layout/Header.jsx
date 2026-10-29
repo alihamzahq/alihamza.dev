@@ -1,15 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import ThemeToggle from '@/components/ui/ThemeToggle';
-
-const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact', label: 'Contact' },
-];
+import { navLinks } from '@/lib/constants';
 
 function MenuIcon({ className }) {
   return (
@@ -54,6 +48,10 @@ function CloseIcon({ className }) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const toggleRef = useRef(null);
+  const closeRef = useRef(null);
+  const menuRef = useRef(null);
+  const wasOpen = useRef(false);
 
   // Handle scroll effect for header background
   useEffect(() => {
@@ -89,6 +87,31 @@ export default function Header() {
     };
   }, [mobileMenuOpen]);
 
+  // Move focus into the menu when it opens and back to the toggle when it closes
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      closeRef.current?.focus();
+    } else if (wasOpen.current) {
+      toggleRef.current?.focus();
+    }
+    wasOpen.current = mobileMenuOpen;
+  }, [mobileMenuOpen]);
+
+  // Keep Tab focus inside the open menu
+  const handleMenuKeyDown = (e) => {
+    if (e.key !== 'Tab' || !menuRef.current) return;
+    const focusable = menuRef.current.querySelectorAll('a[href], button');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
   return (
     <>
       <header
@@ -104,8 +127,8 @@ export default function Header() {
         >
           <div className="flex h-16 items-center justify-between">
             {/* Logo / Name */}
-            <a
-              href="#"
+            <Link
+              href="/"
               className={`text-lg font-bold transition-all duration-200 ${
                 scrolled
                   ? 'text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400'
@@ -113,12 +136,12 @@ export default function Header() {
               }`}
             >
               Ali Hamza
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex md:items-center md:gap-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 link-underline ${
@@ -128,7 +151,7 @@ export default function Header() {
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="ml-3 pl-3 border-l border-gray-200/50 dark:border-slate-700/50">
                 <ThemeToggle scrolled={scrolled} />
@@ -139,6 +162,7 @@ export default function Header() {
             <div className="flex items-center gap-2 md:hidden">
               <ThemeToggle scrolled={scrolled} />
               <button
+                ref={toggleRef}
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={`p-2 rounded-lg transition-colors ${
@@ -167,6 +191,9 @@ export default function Header() {
       {/* Mobile Menu */}
       <div
         id="mobile-menu"
+        ref={menuRef}
+        inert={!mobileMenuOpen}
+        onKeyDown={handleMenuKeyDown}
         className={`mobile-menu md:hidden ${mobileMenuOpen ? 'open' : ''}`}
         role="dialog"
         aria-modal="true"
@@ -176,6 +203,7 @@ export default function Header() {
         <div className="mobile-menu-header">
           <span className="mobile-menu-logo">Ali Hamza</span>
           <button
+            ref={closeRef}
             type="button"
             onClick={() => setMobileMenuOpen(false)}
             className="mobile-menu-close"
@@ -188,14 +216,14 @@ export default function Header() {
         {/* Navigation Links */}
         <nav className="mobile-menu-nav">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={handleLinkClick}
               className="mobile-menu-link"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

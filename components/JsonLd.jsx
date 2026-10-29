@@ -1,85 +1,66 @@
 import { personalInfo, siteMetadata } from '@/lib/constants';
 import { skills, experience } from '@/lib/data';
 
+// One @graph holds all site-level structured data. ProfilePage points at the Person
+// by @id so the person is declared once. Only facts that are visible on the site appear here.
 export default function JsonLd() {
   const allSkills = Object.values(skills).flat();
+  const [city, country] = personalInfo.location.split(',').map((part) => part.trim());
 
-  const personSchema = {
+  const personId = `${siteMetadata.url}/#person`;
+  const websiteId = `${siteMetadata.url}/#website`;
+
+  const graph = {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: personalInfo.name,
-    url: siteMetadata.url,
-    image: `${siteMetadata.url}${siteMetadata.image}`,
-    jobTitle: personalInfo.title,
-    description: siteMetadata.description,
-    email: personalInfo.email,
-    sameAs: [
-      personalInfo.linkedin,
-      personalInfo.github,
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': personId,
+        name: personalInfo.name,
+        url: siteMetadata.url,
+        image: `${siteMetadata.url}/images/profile.jpeg`,
+        jobTitle: personalInfo.title,
+        description: siteMetadata.description,
+        email: personalInfo.email,
+        sameAs: [personalInfo.linkedin, personalInfo.github],
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: city,
+          addressCountry: country,
+        },
+        knowsAbout: allSkills,
+        alumniOf: {
+          '@type': 'EducationalOrganization',
+          name: 'Virtual University of Pakistan',
+        },
+        worksFor: {
+          '@type': 'Organization',
+          name: experience[0].company,
+        },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': websiteId,
+        name: personalInfo.name,
+        url: siteMetadata.url,
+        description: siteMetadata.description,
+        publisher: { '@id': personId },
+      },
+      {
+        '@type': 'ProfilePage',
+        '@id': `${siteMetadata.url}/#profile`,
+        url: siteMetadata.url,
+        name: siteMetadata.title,
+        isPartOf: { '@id': websiteId },
+        mainEntity: { '@id': personId },
+      },
     ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: personalInfo.location.split(',')[0].trim(),
-      addressCountry: personalInfo.location.split(',')[1]?.trim() || 'Pakistan',
-    },
-    knowsAbout: allSkills,
-    knowsLanguage: ['English', 'Urdu'],
-    nationality: {
-      '@type': 'Country',
-      name: 'Pakistan',
-    },
-    hasOccupation: {
-      '@type': 'Occupation',
-      name: personalInfo.title,
-      skills: allSkills.join(', '),
-    },
-    seeks: {
-      '@type': 'Demand',
-      name: 'Remote Full-Stack Developer roles',
-    },
-    alumniOf: {
-      '@type': 'EducationalOrganization',
-      name: 'Virtual University of Pakistan',
-    },
-    worksFor: {
-      '@type': 'Organization',
-      name: experience[0]?.company || 'Sixlogics',
-    },
-  };
-
-  const profilePageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    url: siteMetadata.url,
-    mainEntity: personSchema,
-  };
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: personalInfo.name,
-    url: siteMetadata.url,
-    description: siteMetadata.description,
-    author: {
-      '@type': 'Person',
-      name: personalInfo.name,
-    },
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
   );
 }

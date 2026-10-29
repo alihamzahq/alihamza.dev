@@ -4,10 +4,12 @@ import Skills from '@/components/sections/Skills';
 import Projects from '@/components/sections/Projects';
 import Experience from '@/components/sections/Experience';
 import Contact from '@/components/sections/Contact';
+import JsonLd from '@/components/JsonLd';
 
 export default function Home() {
   return (
     <>
+      <JsonLd />
       <Hero />
       <About />
       <Skills />

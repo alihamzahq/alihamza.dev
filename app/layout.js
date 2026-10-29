@@ -2,7 +2,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import JsonLd from '@/components/JsonLd';
 import { siteMetadata, personalInfo } from '@/lib/constants';
 
 const inter = Inter({
@@ -36,7 +35,7 @@ export const metadata = {
         url: siteMetadata.image,
         width: 1200,
         height: 630,
-        alt: `${personalInfo.name} - ${personalInfo.title}`,
+        alt: `${personalInfo.name} - ${personalInfo.title} and ${personalInfo.secondaryTitle}`,
       },
     ],
   },
@@ -45,7 +44,6 @@ export const metadata = {
     title: siteMetadata.title,
     description: siteMetadata.description,
     images: [siteMetadata.image],
-    creator: siteMetadata.twitterHandle,
   },
   robots: {
     index: true,
@@ -77,10 +75,9 @@ const themeScript = `
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={inter.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <JsonLd />
       </head>
       <body
         className={`${inter.variable} antialiased min-h-screen bg-background text-foreground flex flex-col`}
