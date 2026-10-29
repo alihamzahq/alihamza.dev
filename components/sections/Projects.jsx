@@ -22,7 +22,7 @@ export default function Projects() {
     <SectionWrapper id="projects">
       <SectionHeading
         title="Featured Projects"
-        subtitle="Projects showcasing my expertise"
+        subtitle="Commercial platforms I have worked on and public repositories that show how I design, build, and test backend systems"
       />
 
       <div className="max-w-5xl mx-auto">
@@ -36,7 +36,7 @@ export default function Projects() {
         {/* GitHub CTA */}
         <div className="mt-12 text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Want to see more? Check out my GitHub profile for additional projects and contributions.
+            Want to see more? Browse my GitHub profile for additional repositories.
           </p>
           <a
             href={personalInfo.github}

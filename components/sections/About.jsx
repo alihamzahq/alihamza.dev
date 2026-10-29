@@ -72,15 +72,20 @@ export default function About() {
     <SectionWrapper id="about">
       <SectionHeading
         title="About Me"
-        subtitle="Get to know my background and what drives me"
+        subtitle="Backend systems, SaaS architecture, and engineering leadership"
       />
 
       <div className="max-w-4xl mx-auto">
         {/* Introduction */}
-        <div className="mb-10">
-          <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-            {aboutContent.intro}
-          </p>
+        <div className="mb-10 space-y-4">
+          {aboutContent.intro.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
 
         {/* Highlights Card */}
@@ -103,7 +108,7 @@ export default function About() {
         </div>
 
         {/* Remote Work Banner */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-8 shadow-lg">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-700 p-8 shadow-lg focus-on-gradient">
           {/* Background pattern */}
           <div className="absolute inset-0 hero-grid opacity-20" />
 
@@ -113,14 +118,14 @@ export default function About() {
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-bold text-white mb-2">
-                Open to Remote Opportunities
+                Open to International Remote Opportunities
               </h3>
-              <p className="text-white/90 mb-3 leading-relaxed">
+              <p className="text-white mb-3 leading-relaxed">
                 {aboutContent.remote}
               </p>
-              <div className="flex items-center gap-2 text-white/80">
+              <div className="flex items-center gap-2 text-white/90">
                 <MapPinIcon className="w-4 h-4" />
-                <span className="text-sm">Based in {personalInfo.location}</span>
+                <span className="text-sm">{personalInfo.location}</span>
               </div>
             </div>
           </div>

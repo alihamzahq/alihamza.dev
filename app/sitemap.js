@@ -1,45 +1,24 @@
 import { siteMetadata } from '@/lib/constants';
 import { projects } from '@/lib/data';
 
+// Only real, separately addressable URLs belong here (not /#section anchors).
+// lastModified comes from siteMetadata.contentUpdated so it changes only when
+// the content does, not on every build.
 export default function sitemap() {
-  const projectPages = projects.map((project) => ({
-    url: `${siteMetadata.url}/projects/${project.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  }));
+  const lastModified = new Date(siteMetadata.contentUpdated);
 
   return [
     {
       url: siteMetadata.url,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 1,
     },
-    ...projectPages,
-    {
-      url: `${siteMetadata.url}/#about`,
-      lastModified: new Date(),
+    ...projects.map((project) => ({
+      url: `${siteMetadata.url}/projects/${project.slug}`,
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.8,
-    },
-    {
-      url: `${siteMetadata.url}/#skills`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteMetadata.url}/#experience`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteMetadata.url}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    })),
   ];
 }

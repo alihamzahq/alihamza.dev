@@ -1,4 +1,4 @@
-import { personalInfo, siteMetadata } from '@/lib/constants';
+import { personalInfo, siteMetadata, projectLinkTypes } from '@/lib/constants';
 import { skills, projects, experience, aboutContent } from '@/lib/data';
 
 // Concise, AI-readable summary of the site following the llmstxt.org convention.
@@ -9,9 +9,11 @@ export function GET() {
 
   const projectLines = projects
     .map((p) => {
-      const links = [`${siteMetadata.url}/projects/${p.slug}`];
-      if (p.github) links.push(p.github);
-      return `- **${p.title}** — ${p.description.split('. ')[0]}.\n  ${links.join(' | ')}`;
+      const links = [
+        `${siteMetadata.url}/projects/${p.slug}`,
+        ...p.links.map((l) => `${projectLinkTypes[l.type].label}: ${l.href}`),
+      ];
+      return `- **${p.title}** (${p.kind === 'commercial' ? 'commercial, private source' : 'personal, public source'}) — ${p.summary}\n  ${links.join(' | ')}`;
     })
     .join('\n');
 
@@ -19,15 +21,15 @@ export function GET() {
     .map((e) => `- **${e.role}**, ${e.company} (${e.period})`)
     .join('\n');
 
-  const md = `# ${personalInfo.name} — ${personalInfo.title}
+  const md = `# ${personalInfo.name} — ${personalInfo.title} | ${personalInfo.secondaryTitle}
 
 > ${siteMetadata.description}
 
-${personalInfo.subtitle}. Based in ${personalInfo.location}. Open to remote opportunities.
+${personalInfo.subtitle}. Location: ${personalInfo.location}. ${aboutContent.remote}
 
 ## About
 
-${aboutContent.intro}
+${aboutContent.intro.join('\n\n')}
 
 ## Skills
 
@@ -47,6 +49,7 @@ ${experienceLines}
 - Email: ${personalInfo.email}
 - LinkedIn: ${personalInfo.linkedin}
 - GitHub: ${personalInfo.github}
+- Resume (PDF): ${siteMetadata.url}${personalInfo.resume}
 
 ## More
 

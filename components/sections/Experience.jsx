@@ -27,7 +27,7 @@ export default function Experience() {
     <SectionWrapper id="experience" alternate>
       <SectionHeading
         title="Professional Experience"
-        subtitle="My journey building products and leading teams"
+        subtitle="Seven years building and leading SaaS and web application teams"
       />
 
       <div className="max-w-4xl mx-auto">
@@ -45,13 +45,13 @@ export default function Experience() {
             Education
           </h3>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-3">
             {education.map((edu) => (
               <div
-                key={edu.degree}
+                key={`${edu.degree}-${edu.period}`}
                 className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6"
               >
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-1 text-balance">
                   {edu.degree}
                 </h4>
                 <p className="text-blue-600 dark:text-blue-400 text-sm mb-2">
@@ -60,6 +60,11 @@ export default function Experience() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {edu.period}
                 </p>
+                {edu.note && (
+                  <p className="mt-2 text-sm italic text-gray-500 dark:text-gray-400">
+                    {edu.note}
+                  </p>
+                )}
               </div>
             ))}
           </div>

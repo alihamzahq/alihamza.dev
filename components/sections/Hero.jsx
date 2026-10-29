@@ -1,5 +1,4 @@
-'use client';
-
+import Image from 'next/image';
 import { personalInfo } from '@/lib/constants';
 
 function GitHubIcon({ className }) {
@@ -52,7 +51,7 @@ function GlobeIcon({ className }) {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 md:pt-28 md:pb-28 overflow-hidden hero-gradient">
+    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 md:pt-28 md:pb-28 overflow-hidden hero-gradient focus-on-gradient">
       {/* Animated gradient overlay */}
       <div className="hero-overlay animate-glow-pulse" />
 
@@ -67,70 +66,67 @@ export default function Hero() {
         <div className="text-center">
           {/* Profile Photo */}
           <div className="mb-6 animate-fade-in-up">
-            <img
+            <Image
               src="/images/profile.jpeg"
-              alt={personalInfo.name}
+              alt="Portrait of Ali Hamza"
+              width={128}
+              height={128}
+              priority
               className="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto object-cover border-4 border-white/20 shadow-xl"
-              loading="eager"
             />
           </div>
-
-          {/* Greeting */}
-          <p className="text-white/90 font-semibold mb-4 tracking-wide animate-fade-in-up text-sm uppercase">
-            Hi, my name is
-          </p>
 
           {/* Name */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in-up stagger-1 tracking-tight">
             {personalInfo.name}
           </h1>
 
-          {/* Title */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white/95 mb-4 animate-fade-in-up stagger-2">
-            {personalInfo.title}
+          {/* Titles: primary role large, secondary role beneath it */}
+          <h2 className="mb-4 animate-fade-in-up stagger-2">
+            <span className="block text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
+              {personalInfo.title}
+            </span>
+            <span className="sr-only">, </span>
+            <span className="block mt-1 text-lg sm:text-xl md:text-2xl font-medium text-white">
+              {personalInfo.secondaryTitle}
+            </span>
           </h2>
 
-          {/* Subtitle */}
-          <p className="text-lg text-white/85 mb-3 font-medium animate-fade-in-up stagger-3">
+          {/* Technical subtitle */}
+          <p className="text-base sm:text-lg text-white mb-5 font-medium text-balance animate-fade-in-up stagger-3">
             {personalInfo.subtitle}
           </p>
 
           {/* Remote Badge */}
           <div className="flex justify-center mb-6 animate-fade-in-up stagger-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-sm text-white/95 rounded-full text-sm font-medium border border-white/20">
-              <GlobeIcon className="w-4 h-4 animate-pulse-soft" />
-              Open to Remote Opportunities
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/20 backdrop-blur-sm text-white rounded-2xl sm:rounded-full text-xs sm:text-sm font-medium border border-white/30 text-center leading-snug">
+              <GlobeIcon className="w-4 h-4 flex-shrink-0" />
+              Open to International Remote Opportunities
             </span>
           </div>
 
           {/* Tagline */}
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up stagger-4">
+          <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto mb-10 leading-relaxed text-balance animate-fade-in-up stagger-4">
             {personalInfo.tagline}
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up stagger-5">
-            <a
-              href="#projects"
-              className="btn btn-lg btn-white"
-            >
-              View My Work
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto mb-10 animate-fade-in-up stagger-5">
+            <a href="#projects" className="btn btn-lg btn-white">
+              View Projects
             </a>
             <a
-              href="#contact"
-              className="btn btn-lg btn-white-outline"
-            >
-              Get In Touch
-            </a>
-            <a
-              href="/Ali_Hamza_Full_Stack_Developer.pdf"
+              href={personalInfo.resume}
               download
-              className="inline-flex items-center gap-2 btn btn-lg btn-white-outline"
+              className="btn btn-lg btn-white-outline"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
               </svg>
-              Download CV
+              Download Resume
+            </a>
+            <a href="#contact" className="btn btn-lg btn-white-outline">
+              Get in Touch
             </a>
           </div>
 
@@ -140,7 +136,7 @@ export default function Hero() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-xl hover:scale-110"
+              className="p-3 text-white/85 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-xl hover:scale-110"
               aria-label="GitHub Profile"
             >
               <GitHubIcon className="w-6 h-6" />
@@ -149,7 +145,7 @@ export default function Hero() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-xl hover:scale-110"
+              className="p-3 text-white/85 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-xl hover:scale-110"
               aria-label="LinkedIn Profile"
             >
               <LinkedInIcon className="w-6 h-6" />
@@ -159,9 +155,9 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <button
-        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer transition-colors"
+      <a
+        href="#about"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 hover:text-white transition-colors"
         aria-label="Scroll to About section"
       >
         <svg
@@ -170,7 +166,8 @@ export default function Hero() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 text-white/50 hover:text-white"
+          className="w-6 h-6"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -178,7 +175,7 @@ export default function Hero() {
             d="m19.5 8.25-7.5 7.5-7.5-7.5"
           />
         </svg>
-      </button>
+      </a>
     </section>
   );
 }
