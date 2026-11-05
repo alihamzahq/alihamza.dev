@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { projects } from '@/lib/data';
 import { siteMetadata, personalInfo, projectLinkTypes, projectKinds } from '@/lib/constants';
 import ProjectJsonLd from '@/components/ProjectJsonLd';
+import ArchitectureGuide from '@/components/projects/ArchitectureGuide';
 
 function getProject(slug) {
   return projects.find((p) => p.slug === slug);
@@ -303,7 +304,7 @@ export default async function ProjectPage({ params }) {
 
       {/* Content */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {/* Key Value */}
           <div className="p-6 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 rounded-2xl border border-indigo-100 dark:border-indigo-900/50">
             <p className="text-indigo-700 dark:text-indigo-300">
@@ -331,6 +332,13 @@ export default async function ProjectPage({ params }) {
               </InfoCard>
             );
           })}
+
+          {/* Optional educational guide (data-driven, see `guide` in lib/data.js) */}
+          {project.guide && (
+            <InfoCard title={project.guide.title} icon="&#8596;">
+              <ArchitectureGuide guide={project.guide} />
+            </InfoCard>
+          )}
 
           {/* Screenshots */}
           {project.screenshots && project.screenshots.length > 0 && (
