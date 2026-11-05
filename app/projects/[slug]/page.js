@@ -218,7 +218,7 @@ export default async function ProjectPage({ params }) {
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <ProjectJsonLd project={project} />
       {/* Header */}
-      <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 pt-24 pb-16 md:pt-28 md:pb-20 focus-on-gradient">
+      <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 dark:bg-[image:var(--hero-gradient)] pt-24 pb-16 md:pt-28 md:pb-20 focus-on-gradient">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/#projects"
