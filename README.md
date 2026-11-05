@@ -82,7 +82,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ### Maintenance notes
 
 - **Resume:** the downloadable PDF lives in `public/` and is referenced only through `personalInfo.resume`. The old filename (`/Ali_Hamza_Full_Stack_Developer.pdf`) redirects to it via `next.config.mjs`.
-- **Sitemap dates:** `lastModified` comes from dates kept in the data, so it stays truthful. When you change a project page's content, bump that project's `updated` in `lib/data.js`. When you change the homepage copy, bump `siteMetadata.contentUpdated` in `lib/constants.js`. The homepage's sitemap date is the latest of its own date and every project's `updated`.
+- **Sitemap dates:** `lastModified` comes from dates kept in the data, so it stays truthful. When you change a project page's content, bump that project's `updated` in `lib/data.js`. When you change the homepage copy, bump `siteMetadata.contentUpdated` in `lib/constants.js`. The homepage date is tracked on its own, so also bump `contentUpdated` if you change text shown on the homepage project cards (title, summary, stack).
 - **Open Graph image:** `public/images/og-senior-engineer.jpg` (1200x630). If you replace it, use a new filename so social platforms don't serve a cached preview.
 - **Projects:** each project has a `kind` (`commercial` or `personal`) and typed `links`. Use `case-study` for documentation-only repositories, never `source`.
 
