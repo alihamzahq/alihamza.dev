@@ -1,5 +1,5 @@
 import { personalInfo, siteMetadata } from '@/lib/constants';
-import { skills, experience } from '@/lib/data';
+import { skills, experience, homepageUpdated } from '@/lib/data';
 
 // One @graph holds all site-level structured data. ProfilePage points at the Person
 // by @id so the person is declared once. Only facts that are visible on the site appear here.
@@ -51,6 +51,7 @@ export default function JsonLd() {
         '@id': `${siteMetadata.url}/#profile`,
         url: siteMetadata.url,
         name: siteMetadata.title,
+        dateModified: homepageUpdated,
         isPartOf: { '@id': websiteId },
         mainEntity: { '@id': personId },
       },

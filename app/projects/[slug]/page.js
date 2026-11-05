@@ -28,8 +28,8 @@ export async function generateMetadata({ params }) {
 
   if (!project) return {};
 
-  const title = project.title;
-  const description = toMetaDescription(project.summary);
+  const title = project.seoTitle || project.title;
+  const description = toMetaDescription(project.seoDescription || project.summary);
   const url = `${siteMetadata.url}/projects/${project.slug}`;
 
   return {
@@ -209,6 +209,11 @@ export default async function ProjectPage({ params }) {
     notFound();
   }
 
+  // Resolve related-project references; skip any slug that no longer exists.
+  const related = (project.related || [])
+    .map((rel) => ({ project: getProject(rel.slug), note: rel.note }))
+    .filter((rel) => rel.project);
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <ProjectJsonLd project={project} />
@@ -362,12 +367,33 @@ export default async function ProjectPage({ params }) {
             </InfoCard>
           )}
 
+          {/* Related projects */}
+          {related.length > 0 && (
+            <InfoCard title="Related Projects" icon="&#8644;">
+              <nav aria-label="Related projects">
+                <ul className="space-y-3">
+                  {related.map(({ project: other, note }) => (
+                    <li key={other.slug} className="leading-relaxed text-gray-600 dark:text-gray-300">
+                      <Link
+                        href={`/projects/${other.slug}`}
+                        className="font-medium underline decoration-gray-300 dark:decoration-slate-600 underline-offset-4 text-indigo-600 dark:text-indigo-400 hover:decoration-current"
+                      >
+                        {other.title}
+                      </Link>
+                      {note ? `: ${note}` : null}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </InfoCard>
+          )}
+
           {/* CTA */}
           <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-200 dark:border-slate-700">
             <div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                 Interested in working together?
-              </h3>
+              </h2>
               <p className="text-gray-600 dark:text-gray-400">
                 I&apos;m open to full-time international remote roles and long-term contracts.
               </p>
