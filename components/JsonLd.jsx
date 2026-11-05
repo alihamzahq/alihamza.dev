@@ -51,6 +51,7 @@ export default function JsonLd() {
         '@id': `${siteMetadata.url}/#profile`,
         url: siteMetadata.url,
         name: siteMetadata.title,
+        dateModified: siteMetadata.contentUpdated,
         isPartOf: { '@id': websiteId },
         mainEntity: { '@id': personId },
       },

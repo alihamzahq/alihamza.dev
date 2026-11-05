@@ -129,8 +129,8 @@ export default function Contact() {
             </h3>
             <p className="text-white mb-8 max-w-lg mx-auto leading-relaxed">
               I&apos;m open to full-time international remote roles and long-term contracts. If you&apos;re
-              building or scaling a Laravel or React platform, or need an engineer who can also
-              lead a team, I&apos;d be glad to talk.
+              building or scaling a SaaS product or API platform (Laravel, React, or a similar
+              stack), or need an engineer who can also lead a team, I&apos;d be glad to talk.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

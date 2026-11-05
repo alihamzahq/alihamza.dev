@@ -11,8 +11,10 @@ export default function ProjectJsonLd({ project }) {
 
   const url = `${siteMetadata.url}/projects/${project.slug}`;
   const sourceLink = project.links.find((link) => link.type === 'source');
+  // Same @id as the Person declared on the homepage, so search engines treat it as one entity.
   const author = {
     '@type': 'Person',
+    '@id': `${siteMetadata.url}/#person`,
     name: personalInfo.name,
     url: siteMetadata.url,
   };
@@ -24,6 +26,7 @@ export default function ProjectJsonLd({ project }) {
         name: project.title,
         description: project.summary,
         url,
+        dateModified: project.updated,
         keywords: project.stack,
         programmingLanguage: project.languages,
         codeRepository: sourceLink.href,
@@ -32,9 +35,10 @@ export default function ProjectJsonLd({ project }) {
     : {
         '@context': 'https://schema.org',
         '@type': 'CreativeWork',
-        name: `${project.title}: architecture case study`,
+        name: project.title,
         description: project.summary,
         url,
+        dateModified: project.updated,
         keywords: project.stack,
         author,
       };
