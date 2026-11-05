@@ -4,11 +4,16 @@ export default function SectionWrapper({
   className = '',
   containerClassName = '',
   alternate = false,
+  compact = false,
 }) {
   return (
     <section
       id={id}
-      className={`relative py-20 md:py-28 ${
+      className={`relative ${
+        compact
+          ? 'py-12 md:py-16 border-t border-gray-200 dark:border-slate-800'
+          : 'py-20 md:py-28'
+      } ${
         alternate
           ? 'bg-gray-50 dark:bg-slate-800/50'
           : 'bg-white dark:bg-slate-900'

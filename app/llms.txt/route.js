@@ -1,5 +1,6 @@
 import { personalInfo, siteMetadata, projectLinkTypes } from '@/lib/constants';
 import { skills, projects, experience, aboutContent } from '@/lib/data';
+import { getPublishedArticles } from '@/lib/articles';
 
 // Concise, AI-readable summary of the site following the llmstxt.org convention.
 // Served at /llms.txt. Generated from lib/constants.js + lib/data.js so it never
@@ -15,6 +16,10 @@ export function GET() {
       ];
       return `- **${p.title}** (${p.kind === 'commercial' ? 'commercial, private source' : 'personal, public source'}) — ${p.summary}\n  ${links.join(' | ')}`;
     })
+    .join('\n');
+
+  const articleLines = getPublishedArticles()
+    .map((a) => `- **${a.title}** (${a.category}, ${a.publishedAt}) — ${a.description}\n  ${siteMetadata.url}/articles/${a.slug}`)
     .join('\n');
 
   const experienceLines = experience
@@ -38,6 +43,10 @@ ${allSkills}
 ## Featured Projects
 
 ${projectLines}
+
+## Technical Articles
+
+${articleLines}
 
 ## Experience
 
