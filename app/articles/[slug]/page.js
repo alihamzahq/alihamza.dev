@@ -1,10 +1,17 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getArticle, getPublishedArticles, formatArticleDate, getReadingTime } from '@/lib/articles';
+import {
+  getArticle,
+  getPublishedArticles,
+  formatArticleDate,
+  getReadingTime,
+  getArticleToc,
+} from '@/lib/articles';
 import { projects } from '@/lib/data';
 import { siteMetadata, personalInfo } from '@/lib/constants';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
 import ArticleBody from '@/components/articles/ArticleBody';
+import ArticleToc from '@/components/articles/ArticleToc';
 
 export function generateStaticParams() {
   return getPublishedArticles().map((article) => ({ slug: article.slug }));
@@ -81,6 +88,7 @@ export default async function ArticlePage({ params }) {
   const relatedProjects = (article.related?.projects || [])
     .map((rel) => ({ project: projects.find((p) => p.slug === rel.slug), note: rel.note }))
     .filter((rel) => rel.project);
+  const toc = getArticleToc(article);
   const showUpdated = article.updatedAt !== article.publishedAt;
 
   return (
@@ -130,6 +138,9 @@ export default async function ArticlePage({ params }) {
       </header>
 
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Only worth showing for articles with several sections */}
+        {toc.length >= 4 && <ArticleToc items={toc} />}
+
         <article>
           <ArticleBody content={article.content} />
         </article>

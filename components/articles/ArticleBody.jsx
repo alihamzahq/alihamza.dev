@@ -2,15 +2,9 @@
 // Server component: no client-side JavaScript. Headings get anchor ids so sections can be linked.
 import Inline from '@/components/ui/RichText';
 import ComparisonTable from '@/components/ui/ComparisonTable';
+import { slugifyHeading as slugify } from '@/lib/articles';
 
 const prose = 'text-base sm:text-lg leading-8 text-gray-700 dark:text-gray-300';
-
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
 
 function Block({ block, index }) {
   switch (block.type) {
@@ -18,7 +12,7 @@ function Block({ block, index }) {
       return (
         <h2
           id={slugify(block.text)}
-          className="mt-14 mb-1 scroll-mt-24 border-t border-gray-200 dark:border-slate-700 pt-10 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-balance"
+          className="mt-14 mb-4 scroll-mt-24 border-t border-gray-200 dark:border-slate-700 pt-10 text-2xl sm:text-[1.75rem] font-semibold leading-snug tracking-tight text-gray-900 dark:text-white"
         >
           {block.text}
         </h2>
@@ -27,7 +21,7 @@ function Block({ block, index }) {
       return (
         <h3
           id={slugify(block.text)}
-          className="mt-8 mb-0 scroll-mt-24 text-xl font-bold text-gray-900 dark:text-white text-balance"
+          className="mt-10 mb-3 scroll-mt-24 text-lg sm:text-xl font-semibold leading-snug text-gray-900 dark:text-white"
         >
           {block.text}
         </h3>

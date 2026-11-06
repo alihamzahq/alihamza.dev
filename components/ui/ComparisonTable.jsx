@@ -12,7 +12,12 @@ export default function ComparisonTable({
   columns,
   rows,
   minWidthClass = 'min-w-[36rem]',
+  compact = false,
 }) {
+  // `compact` is for small data tables (a few short columns): tighter cells, and column
+  // headers never break mid-word (an identifier such as tenant_id stays on one line).
+  const pad = compact ? 'px-3 py-2.5' : 'px-4 py-3';
+  const cx = (...names) => names.filter(Boolean).join(' ');
   return (
     <div
       role="region"
@@ -33,7 +38,7 @@ export default function ComparisonTable({
               <th
                 key={column}
                 scope="col"
-                className="px-4 py-3 font-semibold text-gray-900 dark:text-white"
+                className={cx(pad, 'font-semibold text-gray-900 dark:text-white', compact && 'whitespace-nowrap')}
               >
                 {column}
               </th>
@@ -43,11 +48,11 @@ export default function ComparisonTable({
         <tbody>
           {rows.map(([concern, ...cells]) => (
             <tr key={concern} className="border-t border-gray-200 dark:border-slate-700 align-top">
-              <th scope="row" className="w-1/4 px-4 py-3 font-semibold text-gray-900 dark:text-white">
+              <th scope="row" className={cx(!compact && 'w-1/4', pad, 'font-semibold text-gray-900 dark:text-white')}>
                 {concern}
               </th>
               {cells.map((cell, i) => (
-                <td key={i} className={`px-4 py-3 ${bodyText}`}>
+                <td key={i} className={`${pad} ${bodyText}`}>
                   <Inline text={cell} />
                 </td>
               ))}

@@ -36,7 +36,7 @@ export const metadata = {
 };
 
 export default function ArticlesPage() {
-  const articles = getPublishedArticles();
+  const [featured, ...rest] = getPublishedArticles();
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
@@ -52,11 +52,14 @@ export default function ArticlesPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <h2 className="sr-only">Published articles</h2>
-        <div className="grid grid-cols-1 gap-6">
-          {articles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </div>
+        {featured && <ArticleCard article={featured} featured />}
+        {rest.length > 0 && (
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {rest.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
